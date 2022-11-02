@@ -20,7 +20,7 @@ if not(bool(BotDB.get_parametrs())):
     BotDB.add_parametr("Contacrs", "Контакты - ")
     BotDB.add_parametr("admins", "[486290555, 565444877]")
 
-vk = vk_api.VkApi(token="vk1.a.nzULi3uVtJnPhO97ElfDil9DZjO070-lVvC_OGAdYkgAbRBKcDQENJ8BT2qwpgzHWlRgF3axTZdQsNm-h6lVbPBwMriZ2LXsLgXiHDXSjTzdXD-ClZU-opmj7jzKyd3mwfC1irUxjHVk73c9GiMl5JhYx4oGd8smQcifvcQFRZI0erA8jK9NHy-J9hb4JrIWk-VpwGJudKjUci_K_-Wwuw")
+vk = vk_api.VkApi(token= "vk1.a.nzULi3uVtJnPhO97ElfDil9DZjO070-lVvC_OGAdYkgAbRBKcDQENJ8BT2qwpgzHWlRgF3axTZdQsNm-h6lVbPBwMriZ2LXsLgXiHDXSjTzdXD-ClZU-opmj7jzKyd3mwfC1irUxjHVk73c9GiMl5JhYx4oGd8smQcifvcQFRZI0erA8jK9NHy-J9hb4JrIWk-VpwGJudKjUci_K_-Wwuw")
 vk._auth_token()
 api = vk.get_api()
 longpoll = VkBotLongPoll(vk, 212719108)
@@ -79,9 +79,9 @@ def get_cat():
         return 0
 
 
-while True:
-    try:
-        for event in longpoll.listen():
+def bott(event): 
+    if True:
+        try:
             if event.type == VkBotEventType.MESSAGE_NEW:
                 msg = event.object.message["text"]
                 id = event.object.message["from_id"]
@@ -290,5 +290,12 @@ while True:
                             
                                 
                                 
-    except:
-        print('Ошибка:\n', traceback.format_exc())
+        except:
+            print('Ошибка:\n', traceback.format_exc())
+
+
+while True:
+    for event in longpoll.listen():
+        t = Thread(target=bott, args=(event,))
+        t.start()
+        
